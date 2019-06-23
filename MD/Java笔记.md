@@ -292,4 +292,83 @@ Outer.StaticInner in = new Outer.StaticInner();
 
   
 
+## Object 待补充
+
+- 所有JAVA类的父类
+
+- `Object o = 任何对象;`
+
+- Object类里的方法,所有对象都具有.
+
+```JAVA
+getClass();//返回对象的实际类型,返回值是对象类型
+toString();//返回对象的字符串形式，等同于打印对象的toString()方法的返回值
+equals();//判断两个对象的内容是否相等 == 判断两个对象的引用是否相等，针对不同的对象，需要重写不同的equals();方法。
+```
+
+  **注意：**
+
+```
+
+```
+
+## 泛型:模板编程【类型安全】
+
+- 泛型没有多态, 赋值语句前后泛型必须一致
+
+```java
+MyArrayList <String> list = new MyArraylist<String>();//🆗
+MyArrayList <String> list = new MyArraylist<Integer>();//报错
+//在JDk 7之后，可以省略后面尖括号内的
+MyArrayList <String> list = new MyArraylist<>();
+```
+
+- 通配符 ？
+
+  为了表示多种泛型的父类，可以使用通配符
+
+```java
+public void test(List<?> c){		//可以使用任意类型的List调用
+    for(int i; i < c.size();i++)
+        System.out.println();
+}
+
+List<? extends A> //表示A或A的任何子类或实现了A接口的类【A可以是类或接口】
+List<？ super A>//表示A或A的父类
+```
+
+- 泛型方法 <T> 
+
+  **泛型定义在修饰符之后,返回值类型之前**
+  **用以解决方法的参数A或者返回值类型依赖于参数B的情况**
+
+```java
+static <T,S> void method(T t,S s){
+    for(T o:t){
+        //t和s在整个方法的作用域内都可以使用
+    }
+}
+
+T extends A //A可以是类或者接口
+    T extends A & B  //T为A或A的子类，同时实现B接口
+T super A //不能使用super
+```
+
+- 泛型类、泛型接口
+
+  用以实现类、接口的复用，模板化定义和调用
+
+```java
+class MyArrayList<T>{
+    private T[] os;		//T类型的属性
+    public void add(T t){}		//T类型的参数
+    public T get(int pos){		//T类型返回值的成员方法
+        return os[pos];
+    }
+}
+
+interface I<T>{
+    void m(T t);
+}
+```
 
